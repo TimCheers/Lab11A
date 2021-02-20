@@ -1,19 +1,19 @@
 ﻿#include <iostream>
 #include <string>
 using namespace std;
-//добавить в список элемент с заданным номером
 struct STR
 {
     int N;
     string data;
     STR* next;
 };
-STR* fill(int size, int& k)
+STR* fill(int size)
 {
+    cin.ignore();
     STR* first, * p = new STR;
     first = NULL;
     cout << "Введите 1 элемент: ";
-    cin >> p->data;
+    getline(cin, p->data);
     p->N = 1;
     first = p;
     for (int i = 2; i <= size; i++)
@@ -22,9 +22,8 @@ STR* fill(int size, int& k)
         p->next = h; 
         p = p->next;
         cout << "Введите " << i << " элемент: ";
-        cin >> p->data;
+        getline(cin, p->data);
         p->N = i;
-        k++;
         p->next = NULL;
     }
     return first;
@@ -37,7 +36,7 @@ void out(STR* first)
     }
     else
     {
-        cout << "№" << endl;
+        cout << "№\tСтрока:" << endl;
         STR* p = first;
         while (p != NULL)
         {
@@ -47,23 +46,14 @@ void out(STR* first)
         cout << endl;
     }
 }
-void add(STR* first, int No)
+void add(STR* first, int No, bool f)
 {
-    STR* p = first;
+    cin.ignore();
     STR* n = new STR;
-    bool f = 0;
+    STR* a = new STR;
+    STR* p = first;
     while (p != NULL)
     {
-        //if (p->N == 1)
-        //{
-        //    STR* h = new STR;
-        //    p->next = first;
-        //    first = h;
-        //    cout << "Введите новый элемент элемент: ";
-        //    cin >> p->data;
-        //    p->N = No;
-        //    f = 1;
-        //}
         if (p->N == No - 1)
         {
             STR* h = new STR;
@@ -71,16 +61,14 @@ void add(STR* first, int No)
             p->next = h;
             p = p->next;
             cout << "Введите новый элемент элемент: ";
-            cin >> p->data;
+            getline(cin, p->data);
             p->next = n;
             p->N = No;
-            f = 1;
         }
         p = p->next;
-        if (f==true&& p != NULL)
+        if (p != NULL && f == true)
         {
             p->N++;
-
         }
     }
 }
@@ -88,6 +76,7 @@ int main()
 {
     system("chcp 1251>nul");
     int size = -1, No = -1;
+    bool f = 0;
     cout << "Введите количество элементов списка" << endl;
     while (size <= 0)
     {
@@ -97,18 +86,32 @@ int main()
             cout << "Введено некоректное значение" << endl;
         }
     }
-    STR* first = fill(size, size);
+    STR* first = fill(size);
     out(first);
     cout << "Введите номер добавляемого элемента: ";
-    while (No <= 0 || No >= size)
+    while (No <= 0 || No >= size+2)
     {
         cin >> No;
-        if (No <= 0 || No >= size+1)
+        if (No <= 0 || No >= size+2)
         {
             cout << "Введено некоректное значение" << endl;
         }
     }
-    add(first, No);
+    if (No!=size+1)
+    {
+        f = true;
+    }
+    if (No==1)
+    {
+        
+        STR* h = new STR;
+        h->next = first;
+        first = h;
+        cout << "Введите новый элемент элемент: ";
+        getline(cin, h->data);
+        h->N = 1;
+    }
+    add(first, No, f);
     cout << endl << endl;
     out(first);
     return 0;
