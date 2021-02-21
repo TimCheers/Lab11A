@@ -64,6 +64,7 @@ void add(STR* first, int No, bool f)
             getline(cin, p->data);
             p->next = n;
             p->N = No;
+            f = true;
         }
         p = p->next;
         if (p != NULL && f == true)
@@ -97,10 +98,6 @@ int main()
             cout << "Введено некоректное значение" << endl;
         }
     }
-    if (No!=size+1)
-    {
-        f = true;
-    }
     if (No==1)
     {
         
@@ -108,11 +105,13 @@ int main()
         h->next = first;
         first = h;
         cout << "Введите новый элемент элемент: ";
-        getline(cin, h->data);
+        cin >> h->data;
         h->N = 1;
+        f = true;
     }
     add(first, No, f);
     cout << endl << endl;
     out(first);
+    delete first;
     return 0;
 }

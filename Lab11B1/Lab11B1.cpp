@@ -93,6 +93,7 @@ int main()
     out(first);
     delet(first);
     out(first);
+    delete first;
     return 0;
 }
 
