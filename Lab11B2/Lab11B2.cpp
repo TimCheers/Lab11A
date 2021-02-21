@@ -28,14 +28,33 @@ int main()
         cout << endl;
     }
     auto it = STR.begin();
+    auto pt = STR.end();
+    auto qt = STR.begin();
+    int n = 2;
+    pt--;
     ++it;
     while(it != STR.end())
     {
-        STR.erase(it);
-        if ( != STR.end())
+        if (it != pt)
         {
-            ++it;
-            ++it;
+            if (it!=STR.end())
+            {
+                STR.erase(it);
+                it = STR.begin();
+                for (int i = 0; i < n; i++)
+                {
+                    ++it;
+                }
+                if (STR.size() % 2 == 0)
+                {
+                    n++;
+                }
+            }
+        }
+        else
+        {
+            STR.erase(it);
+            it = STR.end();
         }
     }
     auto it2 = STR.begin();
