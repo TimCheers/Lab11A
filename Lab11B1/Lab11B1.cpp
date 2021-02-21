@@ -55,9 +55,20 @@ void delet(STR*& first)
     STR* p = first;
     while (p->next != NULL)
     {
-        if (p->N % 2 == 0)
+        if (p->next->N % 2 == 0)
         {
-            
+            if (p->next->next == NULL)
+            {
+                p->next = NULL;
+            }
+            else
+            {
+                STR* q = p->next;
+                STR* d = p->next->prev;
+                p->next = p->next->next;
+                p->next->prev = d;
+                delete q;
+            }
         }
         else
         {
