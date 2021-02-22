@@ -2,8 +2,6 @@
 #include <list>
 #include <iterator>
 using namespace std;
-
-
 int main()
 {
     system("chcp 1251>nul");
