@@ -45,10 +45,7 @@ int main()
                 {
                     ++it;
                 }
-                if (STR.size() % 2 == 0)
-                {
-                    n++;
-                }
+                n++;
             }
         }
         else
@@ -57,11 +54,13 @@ int main()
             it = STR.end();
         }
     }
+    cout << "Список после обработки:" << endl;
     auto it2 = STR.begin();
     for (auto i = STR.begin(); i != STR.end(); i++)
     {
         cout << *i << endl;
     }
+    delete &STR;
     return 0;
 }
 
