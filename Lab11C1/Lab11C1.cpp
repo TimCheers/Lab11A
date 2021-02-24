@@ -123,6 +123,8 @@ int main()
     STR* st = NULL;
     add(top, st, No, size);
     out(top);
+    delete top;
+    delete st;
     return 0;
 }
 
