@@ -36,11 +36,13 @@ void out(STR* top)
     else
     {
         STR* p = top;
+        cout << "Стек:\t";
         while (p != NULL)
         {
-            cout << p->data << endl;
+            cout << p->data << "  ";
             p = p->prev;
         }
+        cout << endl << endl;
     }
 }
 string Top(STR*& top)
@@ -50,7 +52,7 @@ string Top(STR*& top)
     while (p != NULL)
     {
         k++;
-        p = p->prev;      
+        p = p->prev;  
     }
     p = top;
     if (k == 1)
@@ -77,7 +79,7 @@ STR* pu(STR*& top, string A)
     top = h;
     return top;
 }
-void add(STR* top, STR* st, int No, int size)
+void add(STR*& top, STR* st, int No, int size)
 {
     string dat;
     for (int i = 0; i < size - No + 1; i++)
@@ -118,8 +120,9 @@ int main()
             cout << "Введено некоректное значение" << endl;
         }
     }
-    STR* st = new STR;
+    STR* st = NULL;
     add(top, st, No, size);
+    out(top);
     return 0;
 }
 
