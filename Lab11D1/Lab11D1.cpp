@@ -23,7 +23,8 @@ void fill(int n, STR*& first, STR*& last)
         cout << "Введите " << i << " элемент: ";
         cin >> data;
         h->data = data;
-        p->N = i;
+        h->N = i;
+
         h->next = NULL;
         p->next = h;
         p = p->next;
@@ -39,28 +40,33 @@ void out(STR* first)
     }
     cout << endl;
 }
-void delet(STR*& first)
+void delet(STR*& first, int size)
 {
     STR* p = first;
-    while (p->next != NULL)
+    STR* q = new STR;
+    first = q;
+    for (int i = 0; i < size/2; i++)
     {
-        if (p->next->N % 2 == 0)
+        STR* h = new STR;
+        q->data = p->data;
+        q->N = p->N;
+        p = p->next;
+        p = p->next;
+        if (p==NULL)
         {
-            if (p->next->next == NULL)
-            {
-                p->next = NULL;
-            }
-            else
-            {
-                STR* q = p->next;
-                p->next = p->next->next;
-                delete q;
-            }
+            q->next = NULL;
         }
         else
         {
-            p = p->next;
+            q->next = h;
         }
+        q = q->next;
+    }
+    if (size % 2 != 0)
+    {
+        q->data = p->data;
+        q->N = p->N;
+        q->next = NULL;
     }
 }
 int main()
@@ -79,7 +85,9 @@ int main()
     }
     fill(size, first, last);
     out(first);
-    delet(first);
+    delet(first, size);
+    cout << "Очередь после обработки:" << endl;
     out(first);
+    delete first;
 }
 
