@@ -48,10 +48,13 @@ void delet(STR*& first, int size)
     for (int i = 0; i < size/2; i++)
     {
         STR* h = new STR;
+        STR* t = new STR;
         q->data = p->data;
         q->N = p->N;
         p = p->next;
-        p = p->next;
+        t = p->next;
+        delete p;
+        p = t;
         if (p==NULL)
         {
             q->next = NULL;
